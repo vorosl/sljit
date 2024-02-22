@@ -254,7 +254,7 @@ static void test_call3(void)
 {
 	/* Check function calls with floating point arguments. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump* jump = NULL;
 	sljit_f64 dbuf[7];
 	sljit_f32 sbuf[7];
@@ -270,7 +270,6 @@ static void test_call3(void)
 		return;
 	}
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	dbuf[0] = 5.25;
@@ -528,7 +527,7 @@ static void test_call5(void)
 {
 	/* Test tail calls. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump *jump;
 	sljit_uw jump_addr;
 	sljit_sw executable_offset;
@@ -539,7 +538,6 @@ static void test_call5(void)
 
 	/* Next test. */
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS1(W, W), 4, 4, 0, 0, 0);
@@ -706,7 +704,7 @@ static void test_call6(void)
 {
 	/* Test tail calls. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump *jump;
 	sljit_sw res;
 	sljit_sw wbuf[1];
@@ -727,7 +725,6 @@ static void test_call6(void)
 	dbuf[0] = 9034.75;
 	dbuf[1] = 6307.5;
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS2(W, F32, F64), 1, 1, 4, 0, 0);
@@ -837,7 +834,7 @@ static void test_call7(void)
 {
 	/* Test register argument and keep saved registers. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump* jump;
 	sljit_sw buf[9];
 	sljit_s32 i;
@@ -848,7 +845,6 @@ static void test_call7(void)
 	for (i = 0; i < 9; i++)
 		buf[i] = -1;
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS0V(), 4, 2, 0, 0, 0);
@@ -1116,7 +1112,7 @@ static void test_call8(void)
 {
 	/* Test register argument and keep saved registers. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump* jump;
 	sljit_sw buf[9];
 	sljit_f64 dbuf[3];
@@ -1144,7 +1140,6 @@ static void test_call8(void)
 	dbuf[1] = -3291.75;
 	dbuf[2] = 8703.5;
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS0V(), 2, 3, 3, 0, 0);
@@ -1470,7 +1465,7 @@ static void test_call10(void)
 {
 	/* Test return with floating point value. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump* jump;
 	sljit_f64 dbuf[2];
 	sljit_f32 sbuf[2];
@@ -1487,7 +1482,6 @@ static void test_call10(void)
 
 	/* Next test. */
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS1(F64, W), 0, 1, 3, 0, 0);
@@ -1622,7 +1616,7 @@ static void test_call11(void)
 {
 	/* Test return_to operation. */
 	executable_code code, code2;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump* jump;
 	struct sljit_label* label;
 	sljit_s32 i;
@@ -1633,7 +1627,6 @@ static void test_call11(void)
 
 	/* Next test. */
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS1V(P), 2, 1, 0, 0, 0);
@@ -1874,7 +1867,7 @@ static void test_call12(void)
 {
 	/* Test get return address. */
 	executable_code code;
-	struct sljit_compiler* compiler;
+	struct sljit_compiler* compiler = sljit_create_compiler(NULL, NULL);
 	struct sljit_jump *jump;
 	struct sljit_label *label;
 	sljit_uw return_addr = 0;
@@ -1887,7 +1880,6 @@ static void test_call12(void)
 
 	buf[0] = 0;
 
-	compiler = sljit_create_compiler(NULL, NULL);
 	FAILED(!compiler, "cannot create compiler\n");
 
 	sljit_emit_enter(compiler, 0, SLJIT_ARGS1V(W), 1, 1, 0, 0, 0);
